@@ -1,0 +1,100 @@
+filtroDataSemestre(){
+        
+    let data_inicial = new Date(2019,0,1)
+    let data_atual = new Date()
+
+    let anoAtual = (data_atual.getFullYear());
+    let ano = ''
+    let arrayQtdAnos = []
+
+    //OBTENHO A QTD DE ANOS APARTIR DA DATA INICIAL INFORMADA
+    //[ [ 2019 ], [ 2020 ], [ 2021 ], [ 2022 ] ]
+    // QTD >>>> 3
+    for (let index = 0; index < 100;) {
+
+        if (ano !== anoAtual){        
+            ano = ((data_inicial.getFullYear())+ index)       
+            index++;              
+        }else{
+            //console.log("Stop!");
+            break;
+        }
+            
+        arrayQtdAnos.push([ano])        
+        
+    }
+
+
+    //QUANTIDADE DE ANOS PARA APRESENTAR NO COMBO 
+    let qtd_anos = (arrayQtdAnos.length-1)
+    let qtd_semestres = 1
+
+    let arraySemestre = []
+    let arraySemestreDefault = []
+
+     //**********PREENCHEDO O COMBO DE SEMESTRES ************ 
+
+            //PRIMEIRO FOR PARA ITERAR O ANO DE ACORDO COM A QUANTIDADE INFORMADA
+            for (let i = 0; i < qtd_anos; i++) { 
+
+                let ano = (data_inicial.getFullYear()) + i;
+                // console.log(ano)
+
+                //SEGUNDO FOR PARA VERIFICAR OS SEMESTRES DO RESPECTIVO ANO 
+                //NA QUANTIDADE DE SEMESTRES O VALOR INICIA COM 0 ATE CHEGAR AO VALOR DE SEMESTRE INFORMADO ACIMA, QUE SERIA  let qtd_semestres = 1
+                for(let i = 0; i <= qtd_semestres; i++){
+
+                    let arrayDatas = []
+                    let mes = ''
+                    let textoSemestre = ''
+
+                    //SE O INDEX FOR IGUAL A 0, 1 SEMESTRE
+                    if(i === 0){
+                        mes = ('0'+(data_inicial.getMonth(0)+1) + '-01')
+                        textoSemestre = '1º Semestre /'+ ano
+                    
+                    //SE NAO É SEGUNDO SEMESTRE
+                    }else{
+                        mes = '0'+ ((data_inicial.getMonth()+1) + 6) + '-01' 
+                        textoSemestre = '2º Semestre /'+ ano
+                    }
+
+                    //MONTO O ARRAY DE OBJETOS
+                    arrayDatas = {id : ano +'-'+ mes, data: textoSemestre }
+
+                    //JOGO O ARRAY DENTRO DO ARRAY DE SEMESTRES
+                    arraySemestre.push(arrayDatas)
+                }
+            
+                //ATUALIZO O STATE PARA CARREGAR O COMBO
+                this.setState({filtroSemestral:arraySemestre})
+            }
+
+
+//**********PREENCHEDO O SEMESTRE ATUAL DEFAULT ************ 
+              
+        //OBTENHO O SEMESTRE ATUAL
+        let semestreAtual = (data_atual.getMonth())
+
+       
+        let primeiroSemestre = {id :  data_atual.getFullYear() +'-01-01', data: '1º Semestre /'+ data_atual.getFullYear() } 
+        let segundoSemestre = {id :  data_atual.getFullYear() +'-07-01', data: '2º Semestre /'+ data_atual.getFullYear() } 
+
+
+        //SE SEMESTRE É MENOR QUE 6, OU SEJA MENOR QUE JUNHO
+        if(semestreAtual < 6){
+
+            arraySemestreDefault = {value: data_atual.getFullYear() +'-01-01', label: '1º Semestre /'+ data_atual.getFullYear() }
+            arraySemestre.push(primeiroSemestre)
+
+        //SE SEMESTRE É MAIOR IGUAL QUE 6, JUNHO EM DIANTE...
+        }else if (semestreAtual >= 6){
+        
+            arraySemestreDefault = {value: data_atual.getFullYear() +'-07-01', label: '2º Semestre /'+ data_atual.getFullYear() }
+            arraySemestre.push( primeiroSemestre,segundoSemestre )
+        }
+
+        //ATUALIZO A STATE
+        this.setState({semestreDefault : arraySemestreDefault})
+}
+

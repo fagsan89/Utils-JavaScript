@@ -1,0 +1,121 @@
+
+let data_inicial = new Date(2019,0,1)
+let data_atual= new Date(2022,0,1)
+
+
+let anoAtual = (data_atual.getFullYear());
+let ano = ''
+let arrayQtdAnos = []
+
+        for (let index = 0; index < 100;) {
+
+            if (ano !== anoAtual){        
+                ano = ((data_inicial.getFullYear())+ index)       
+                index++;              
+            }else{
+                //console.log("Stop!");
+                break;
+            }
+                
+            arrayQtdAnos.push([ano])        
+            
+        }
+
+console.log(arrayQtdAnos)
+
+let qtd_anos = (arrayQtdAnos.length-1)
+let qtd_semestres = 1
+
+let arraySemestre = []
+let arraySemestreDefault = []
+
+console.log(qtd_anos)
+
+for (let i = 0; i < qtd_anos; i++) {   
+    let ano = (data_inicial.getFullYear())+ i;
+     // console.log(ano)
+
+    for(let i = 0; i <= qtd_semestres; i++){
+
+        let arrayDatas = []   
+        let mes = ''
+        let textoSemestre = ''
+
+        if(i === 0){
+             mes = ('0'+(data_inicial.getMonth(0)+1) + '-01')
+             textoSemestre = '1º Semestre /'+ ano           
+
+           
+
+        }else{
+             mes = '0'+ ((data_inicial.getMonth()+1) + 6) + '-01' 
+             textoSemestre = '2º Semestre /'+ ano
+
+        }
+
+        arrayDatas = {id : ano +'-'+ mes, data: textoSemestre }
+        arraySemestre.push(arrayDatas)
+
+        
+    }
+  
+}
+
+
+
+    let semestreAtual = (data_atual.getMonth())
+
+    let primeiroSemestreDefaultSemestre = {value: data_atual.getFullYear() +'-'+ '01-01', label: '1º Semestre /'+ data_atual.getFullYear() }
+    let segundoSemestreDefaulSemestre = {value: data_atual.getFullYear() +'-'+ '06-01', label: '2º Semestre /'+ data_atual.getFullYear() }
+    
+    let primeiroSemestre = {id :  data_atual.getFullYear() +'-'+ '01-01', data: '1º Semestre /'+ data_atual.getFullYear() } 
+    let segundoSemestre = {id :  data_atual.getFullYear() +'-'+ '06-01', data: '2º Semestre /'+ data_atual.getFullYear() } 
+
+    if(semestreAtual < 5){
+
+        arraySemestreDefault.push(primeiroSemestreDefaultSemestre)
+        arraySemestre.push(primeiroSemestre)
+
+    }else if (semestreAtual >= 5){
+    
+        arraySemestreDefault.push(segundoSemestreDefaulSemestre)
+        arraySemestre.push( primeiroSemestre,segundoSemestre )
+    }
+    
+  
+
+console.log(arraySemestre)
+console.log(arraySemestreDefault)
+console.log(data_atual.getMonth())
+
+
+
+
+// janeiro   0
+// fevereiro 1
+// março 2
+// abril 3
+// maio 4
+// junho 5
+// julho 6
+// agosto 7
+// setembro 8
+// outubro 9
+// novembro 10
+// dezembro 11
+
+// let data_inicial = new Date(2019,0,1)
+// let data_atual= new Date()
+// console.log( data_inicial.getMonth(), data_atual.getMonth() )
+
+
+//console.log(d.getFullYear()+'-'+ ((d.getMonth() + 1)+5) +'-'+d.getDate())
+
+// <?  
+// $ano_inicial = date("Y");  
+// $qtd = 3;  
+// for($i=-1; $i <= $qtd; $i++) {
+//         $ano = $ano_inicial+$i;	
+//         $ano = sprintf("%02s",$ano);	
+//         echo "<option value=\"".$ano."\">".$ano."</option>\n";  
+//     }?>
