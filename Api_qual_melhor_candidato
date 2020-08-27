@@ -35,6 +35,7 @@ var DB ={
         return item.skills.length
     }).filter(x=>  Math.max(x) )
 
+    // verifica dois numeros, e retorna qual o maior
     const melhor_candidato = Math.max(...consulta_skills2)
 
     const consulta_skills4 = DB.candidatos.map(item =>{
