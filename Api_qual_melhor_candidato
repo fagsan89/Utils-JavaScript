@@ -1,0 +1,46 @@
+var DB ={
+        candidatos:
+        [
+            {
+              id: "ae588a6b-4540-5714-bfe2-a5c2a65f547a1",
+              name: "Jimmy Coder",
+              skills: [ "javascript", "es6", "nodejs", "express","php" ]
+            },
+            {
+              id: "ae588a6b-4540-5714-bfe2-a5c2a65f547a2",
+              name: "Jimmy Coder",
+              skills: [ "javascript"]
+            },
+            {
+              id: "ae588a6b-4540-5714-bfe2-a5c2a65f547a3",
+              name: "Jimmy Coder",
+              skills: [ "javascript", "es6", "express" ]
+            },
+        ]
+            
+    }
+
+    var skills = ["javascript", "es6"]
+
+
+    const consulta_skills = DB.candidatos.map(item =>{
+       if (item.skills.length  >=  skills.length ){
+          return item
+       }
+    }).filter(x=>x)
+
+
+
+    const consulta_skills2 = consulta_skills.map(item =>{
+        return item.skills.length
+    }).filter(x=>  Math.max(x) )
+
+    const melhor_candidato = Math.max(...consulta_skills2)
+
+    const consulta_skills4 = DB.candidatos.map(item =>{
+        if (item.skills.length  ===  melhor_candidato ){
+            return item
+        }
+    }).filter(x=>x)
+    
+    console.log(consulta_skills4)
