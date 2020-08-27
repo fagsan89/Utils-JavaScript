@@ -1,0 +1,27 @@
+function solution (s,k){
+    
+    const dias_semana = [ 'seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom']
+   
+    var dias = [];
+
+    for (var i = 0; i <= 85; i++) {
+        dias = dias.concat(dias_semana);
+    };
+
+    if(k <= 500){
+        const index_semana = dias_semana.map((item, index) => item === s ? index : null).filter(x=>x)
+        const soma_semana = index_semana[0] + k
+        const dia_atual = dias.map((item, index) => index === soma_semana ? item : null).filter(x=>x)
+
+        console.log(dia_atual)
+    }else{
+        console.log('numero invalido')
+    }
+  
+
+    
+}
+
+ 
+
+solution('qua',500)
