@@ -1,0 +1,16 @@
+var a = 'Rua Jules Rimet'
+var b = '28'
+var c = 'barueri'
+var d = 'sp'
+
+
+
+function teste1 (params = []){
+    var array = []
+    params.map((item)=>{
+        array.push(item)
+    })
+    return array
+}
+
+console.log(teste1([a,b,c,d]))
